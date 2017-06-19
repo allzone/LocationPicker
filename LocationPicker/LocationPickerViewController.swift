@@ -101,6 +101,22 @@ open class LocationPickerViewController: UIViewController {
 		let searchBar = self.searchController.searchBar
 		searchBar.searchBarStyle = self.searchBarStyle
 		searchBar.placeholder = self.searchBarPlaceholder
+        if var textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField {
+            textFieldInsideSearchBar.textColor = .white
+            let textFieldInsideSearchBarLabel = textFieldInsideSearchBar.value(forKey: "placeholderLabel") as? UILabel
+            textFieldInsideSearchBarLabel?.textColor = .white
+            
+            if let iconView = textFieldInsideSearchBar.leftView as? UIImageView {
+                
+                iconView.image = iconView.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+                iconView.tintColor = UIColor.white
+            }
+
+            let crossIconView = textFieldInsideSearchBar.value(forKey: "clearButton") as? UIButton
+            crossIconView?.setImage(crossIconView?.currentImage?.withRenderingMode(.alwaysTemplate), for: .normal)
+            crossIconView?.tintColor = .white
+        }
+        
 		return searchBar
 	}()
 	
